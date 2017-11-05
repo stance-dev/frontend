@@ -9,6 +9,7 @@ import {
   Tooltip,
   LineChart,
   CartesianGrid,
+  ResponsiveContainer,
 } from 'recharts';
 
 export default class TimeSeriesViz extends Component {
@@ -28,20 +29,22 @@ export default class TimeSeriesViz extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
 
     return (
       <div>
         <div>
           <h3>Report Trend - Last 6 Months</h3>
         </div>
-        <LineChart width={800} height={400} data={data}>
-          <CartesianGrid />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="reports" stroke="#8884d8" />
-        </LineChart>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={data}>
+            <CartesianGrid />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="reports" stroke="#F85032" />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     );
   }

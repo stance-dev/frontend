@@ -7,7 +7,6 @@ export default class ReportForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reporter: null,
       reported: null,
       comments: null,
       error: null,
@@ -22,46 +21,41 @@ export default class ReportForm extends Component {
 
   onSubmit() {
     const { reporter, reported, comments } = this.state;
-    if (!reporter) {
-      this.setState({ error: 'Reported field cannot be left blank. Only you will have access to that information.' });
-    }
-    if (!(reporter && reported && comments)) {
+    if (!(reported && comments)) {
       return;
     }
-    API.submitReport({ reporter, reported, comments });
+    API.submitReport({ reported, comments });
   }
 
   render() {
     return (
       <div>
 
-        <div>
-          <h1>File A Report</h1>
-        </div>
+        <div className='big'>File A Report</div>
 
         <div>
           <main className='pa3'>
             <p className='f5 lh-copy measure'>
-               This is text about anonymity and what happens with this report. Typography
-               has one plain duty before it and that is to convey information
-               in writing. No argument or consideration can absolve typography from this
-               duty. A printed work which cannot be read becomes a product without
-               purpose.
+              This report is filed anonymously unless you choose
+              to be revealed or to reveal the offender.<br/>
+              If you need to speak to <a>Human Resources</a>, the can
+              be reached at <a>(000) 000 - 0000</a> or at <a>hr@company.net</a>.
+              You employee handbook can also be accessed online at <a></a><br/>
+              For a list of other resources, visit the stance <a>Resources</a> page.
             </p>
           </main>
         </div>
 
         <form>
-          <div className='measure'>
-            <label>Your name</label>
-            <input
-              type='text'
-              className='input-reset ba b--black-20 pa2 mb2 db w-100'
-              onChange={this.onFormUpdate.bind(this, 'reporter')}
-            />
+          <div className='mb4'>
+            <input type="radio" checked onChange={this.onFormUpdate.bind(this, 'anonymous')}/> Keep me anonymous
           </div>
-          <div className='measure'>
-            <label>The guy</label>
+          <div className='mb4'>
+            <input type="radio" checked onChange={this.onFormUpdate.bind(this, 'anonymous')}/> Keep the offender anonymous
+          </div>
+
+          <div className='measure mb4'>
+            <div className='mb2'>Offender</div>
             <input
               type='text'
               className='input-reset ba b--black-20 pa2 mb2 db w-100'
@@ -69,8 +63,22 @@ export default class ReportForm extends Component {
             />
           </div>
 
-          <div>
-            <label>Comments</label>
+          <div className='measure mb4'>
+            <div className='mb2'>Type</div>
+            <div>
+              <select id="" name="Type" style={{width: '100%'}}>
+                <option value="">Sexual Imposition</option>
+                <option value="">Gender Harrassment</option>
+                <option value="">Physical</option>
+                <option value="">Bribery</option>
+                <option value="">Coercion</option>
+                <option value="">Option</option>
+              </select>
+            </div>
+          </div>
+
+          <div className='mb4'>
+            <div className='mb2'>Comments</div>
             <textarea
               className='db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2'
               onChange={this.onFormUpdate.bind(this, 'comments')}

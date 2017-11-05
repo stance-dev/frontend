@@ -12,7 +12,7 @@ export default class QuickLook extends Component {
           <h1>Quick Look</h1>
         </div>
 
-        <div className='cf'>
+        <div className='cf tc'>
           <div className='fl w-30'>
             <div>this month</div>
             <div>

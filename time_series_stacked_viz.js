@@ -8,42 +8,46 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip
+  Tooltip,
+  ResponsiveContainer,
 } from 'recharts';
 
 export default class TimeSeriesStackedViz extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: [
-        { month: 'Jan', engineering: 30, sales: 2, accounting: 6, hr: 0 },
-        { month: 'Feb', engineering: 9,  sales: 6, accounting: 1, hr: 1 },
-        { month: 'Mar', engineering: 23, sales: 8, accounting: 1, hr: 2 },
-        { month: 'Apr', engineering: 17, sales: 3, accounting: 1, hr: 0 },
-        { month: 'May', engineering: 13, sales: 9, accounting: 1, hr: 0 },
-        { month: 'Jun', engineering: 20, sales: 4, accounting: 1, hr: 1 },
-      ]
-    }
   }
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
+    const departments = ['Engineering', 'Production', 'Marketing', 'Human Resources', 'Accounting'];
+    for (let i = 0; i < data.length; i++) {
+      let m = data[i];
+      for (let j = 0; j < departments.length; j++) {
+        let d = departments[j];
+        if (!(d in m)) {
+          m[d] = 0;
+        }
+      }
+    }
 
     return (
       <div>
         <div>
-          <h3>Report Trend - By Department</h3>
+          <h3>Last 7 months - By Department</h3>
         </div>
         <div>
-          <AreaChart width={800} height={400} data={data}
-                      margin={{top: 10, right: 30, left: 0, bottom: 0}}>
-            <XAxis dataKey='month' />
-            <YAxis />
-            <Area type='monotone' dataKey='engineering' stackId="1" stroke='#8884d8' fill='#8884d8' />
-            <Area type='monotone' dataKey='sales' stackId="1" stroke='#82ca9d' fill='#82ca9d' />
-            <Area type='monotone' dataKey='accounting' stackId="1" stroke='#ffc658' fill='#ffc658' />
-            <Area type='monotone' dataKey='hr' stackId="1" stroke='#8884d8' fill='#8884d8' />
-            <Tooltip />
-          </AreaChart>
+          <ResponsiveContainer width='100%' height={400}>
+            <AreaChart data={data}
+                        margin={{top: 10, right: 30, left: 0, bottom: 0}}>
+              <XAxis dataKey='month' />
+              <YAxis />
+              <Area type='monotone' dataKey='Engineering' stackId="1" stroke='#1C0E63' fill='#1C0E63' />
+              <Area type='monotone' dataKey='Production' stackId="1" stroke='#DEAED2' fill='#DEAED2' />
+              <Area type='monotone' dataKey='Marketing' stackId="1" stroke='#11BAD5' fill='#11BAD5' />
+              <Area type='monotone' dataKey='Human Resources' stackId="1" stroke='#3A5EC1' fill='#3A5EC1' />
+              <Area type='monotone' dataKey='Accounting' stackId="1" stroke='#F85032' fill='#F85032' />
+              <Tooltip />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
     );

@@ -1,8 +1,78 @@
+html, body { height: 100%; }
 html {
     font-family: 'Open Sans', sans-serif;
 }
 
+.fh { height: 100%; }
+
 .container {
     padding-left: 100px;
     padding-right: 100px;
+}
+
+.orange { color: #f85032; }
+
+.bg-midnight-blue { background-image: linear-gradient(to bottom,#1f364d 56px,#0e2439 400px); }
+
+.big { font-size: 40px; }
+
+.dark-blue { color: #1C0E63; }
+
+.pink { color: #DEAED2; }
+
+.turquoise { color: #11BAD5; }
+
+.light-blue { color: #3A5EC1; }
+
+.orange { color: #F85032; }
+
+.mb8 { margin-bottom: 7rem; }
+
+.lh-copy > a { color: #F85032; }
+
+/* sunburst */
+#main {
+  float: left;
+  width: 750px;
+}
+
+#sidebar {
+  float: right;
+  width: 100px;
+}
+
+#sequence {
+  width: 600px;
+  height: 70px;
+}
+
+#legend {
+  padding: 10px 0 0 3px;
+}
+
+#sequence text, #legend text {
+  font-weight: 600;
+  fill: #fff;
+}
+
+#chart {
+  position: relative;
+}
+
+#chart path {
+  stroke: #fff;
+}
+
+#explanation {
+  position: absolute;
+  top: 260px;
+  left: 305px;
+  width: 140px;
+  text-align: center;
+  /*color: #666;*/
+  color: white;
+}
+
+#percentage {
+  font-size: 2.5em;
 }
